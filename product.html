@@ -9,13 +9,54 @@
     <title>product-orinico</title>
 </head>
 <body>
-  
-        
-             <script src="main.js">
-            
+<header>
+
+</header>
+  <div id="product"></div>
 
 
-                    </script>
+  <button id="btn">clique moi </button>
+
+
+             <script>
+            vadocument.getElementsById('btn').addEventLsitner('click', async function() {
+               await function main(){ 
+ var request = new XMLHttpRequest();
+   request.open('GET' , 'http://localhost:3000/api/cameras/5be1ed3f1c9d44000030b061');
+
+   request.onload = function (){
+
+    if(this.status == 200){
+      var product = JSON.parse(request.responseText);
+
+      var output=""
+      output += '<div class="product">'+
+                '<img src="' + product.imageUrl+'">' +
+                '<ul>' +
+               '<li><strong>ID :</strong>' +product._id +' </li>' +
+               '<li><strong>Lentille :</strong>' +product.lenses +' </li>' +
+               '<li><strong>Name :</strong>' +product.name +' </li>' +
+               '<li><strong>Price :</strong>' +product.price/100+'€' +' </li>' +
+               '<li><strong>Description :</strong>' +product.description +' </li>' +
+               '</ul>'
+               '</div>'
+
+                    }
+                    document.getElementById('product').innerHTML = output ;
+
+
+  };
+
+   request.send();
+ 
+}
+
+main();
+
+
+            })
+           
+       </script>
 
 
 
