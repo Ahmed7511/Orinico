@@ -15,7 +15,7 @@ function main(){
                  '<img src="' + products[i].imageUrl+'">' +
                  '<ul>' +
                       '<li><strong>ID :</strong> ' + products[i]._id+'</li>' +
-                      '<li><strong>Lentille :</strong> ' + products[i].lenses+'</li>' +
+                      '<li><strong>Lentille :</strong> ' + products[i].lenses[0]+'</li>' +
                       '<li><strong> name :</strong> ' + products[i].name+'</li>' +
                       '<li><strong> price :</strong> ' + products[i].price/100 + ' €' +'</li>' +
                       '<li><strong> Description :</strong> ' + products[i].description+'</li>' +
