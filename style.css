@@ -3,7 +3,7 @@ body{
     background-color: indigo;
     margin: auto;
 }
-nav{
+nav li{
     display: flex;
      justify-content: space-evenly;
      background-color: lightcoral;
@@ -12,6 +12,7 @@ nav{
      font-size: 2rem;
      color: #fff;
 }
+
 h1, h2{
     text-align: center;
    color: #fff;

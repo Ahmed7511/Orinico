@@ -1,14 +1,14 @@
 
 
 function main(){ 
- var request = new XMLHttpRequest();
+
+  var request = new XMLHttpRequest();
    request.open('GET' , 'http://localhost:3000/api/cameras');
 
-   request.onload = async function (){
+   request.onload = function (){
 
     if(this.status == 200){
       var products = JSON.parse(request.responseText);
-
       var output ="";
       for (var i in products){
         output += '<div class="product">'+
@@ -19,8 +19,9 @@ function main(){
                       '<li><strong> name :</strong> ' + products[i].name+'</li>' +
                       '<li><strong> price :</strong> ' + products[i].price/100 + ' €' +'</li>' +
                       '<li><strong> Description :</strong> ' + products[i].description+'</li>' +
-                      '<button class="btn" >Ajouter au panier</button> ' +
+                      '<button class= "btn ' + [i] + '">Ajouter au panier</button>' +
                     '</ul>' +
+
                     '</div>';
                     }
 
@@ -39,3 +40,7 @@ function main(){
 main();
 
 
+let cart1 = document.getElementsByClassName('btn0');
+cart1.addEventListener('click', function(){
+  console.log('added')
+});
