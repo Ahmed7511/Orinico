@@ -19,7 +19,7 @@ function main(){
                       '<li><strong> name :</strong> ' + products[i].name+'</li>' +
                       '<li><strong> price :</strong> ' + products[i].price/100 + ' €' +'</li>' +
                       '<li><strong> Description :</strong> ' + products[i].description+'</li>' +
-                      '<button class= "btn ' + [i] + '">Ajouter au panier</button>' +
+                      '<button class= "add-cart btn ' + [i] +' ">Ajouter au panier</button>' +
                     '</ul>' +
 
                     '</div>';
@@ -40,7 +40,10 @@ function main(){
 main();
 
 
-let cart1 = document.getElementsByClassName('btn0');
-cart1.addEventListener('click', function(){
-  console.log('added')
-});
+var carts = document.getElementsByClassName('add-cart');
+ for(let i=0; i<carts.length; i++){
+    console.log('hey')
+}
+
+
+
