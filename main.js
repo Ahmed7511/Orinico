@@ -52,7 +52,49 @@ main();
   function Redirect0(){
     localStorage.setItem("id1", "http:localhost:3000/api/cameras/5be1ed3f1c9d44000030b061");
     window.location = "http:localhost:3000/api/cameras/5be1ed3f1c9d44000030b061";
-  } 
+    function main(){ 
+
+      var request = new XMLHttpRequest();
+       request.open('GET' , 'http://localhost:3000/api/cameras');
+    
+       request.onload = function (){
+    
+        if(this.status == 200){
+          var products = JSON.parse(request.responseText);
+          var output ="";
+          for (var i in products){
+            output += '<div class="product">'+
+                     '<img src="' + products[i].imageUrl+'">' +
+                     '<ul>' +
+                          '<li><strong>ID :</strong> ' + products[i]._id+'</li>' +
+                          '<li><strong>Lentille :</strong> ' + products[i].lenses[0]+'</li>' +
+                          '<li><strong> name :</strong> ' + products[i].name+'</li>' +
+                          '<li><strong> price :</strong> ' + products[i].price/100 + ' €' +'</li>' +
+                          '<li><strong> Description :</strong> ' + products[i].description+'</li>' +
+                       
+                          '<a id ="btn'+[i]+' " href="produit.html" onclick="Redirect'+[i] +'();" >Ajouter au panier</a>' +
+                       
+                          '</ul>' +
+    
+    
+                        '</div>';
+                        }
+    
+                        document.getElementById('products').innerHTML = output ;
+    
+                      
+    
+                        }
+    
+      };
+    
+       request.send();
+     
+    }
+    
+    main();
+  
+  }
   function Redirect1(){
     localStorage.setItem("id2", "http:localhost:3000/api/cameras/5be1ef211c9d44000030b062");
     window.location = "http:localhost:3000/api/cameras/5be1ef211c9d44000030b062";
