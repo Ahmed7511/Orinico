@@ -30,7 +30,7 @@ h1, h2{
 .product ul{
     list-style-type: none;
 }
-.btn{
+a{
     color: #fff;
     background-color: lightcoral;
     max-width: 200px;
