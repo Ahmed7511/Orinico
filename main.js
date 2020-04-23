@@ -50,44 +50,7 @@ main();
   //                 '5be9c4471c9d440000a730e8', '5be9c4c71c9d440000a730e9']
 //const getProducts = document.getElementsByClassName('btn');
 
-   function getProduct(){ 
- var request = new XMLHttpRequest();
- for (var i in products){
-
-   request.open('GET' , 'http://localhost:3000/api/cameras/'+ products[i]._id);
- } 
-   request.onload = function (){
-
-    if(this.status == 200){
-      var product = JSON.parse(request.responseText);
-
-      var output=""
-      output += '<div class="product">'+
-                '<img src="' + product.imageUrl+'">' +
-                '<ul>' +
-               '<li><strong>ID :</strong>' +product._id +' </li>' +
-               '<li><strong>Lentille :</strong>' +
-                '<select><option name="lentille" value ="lenses[0]"> ' +
-                   product.lenses[0] +'<option name="lentille" value="lenses[1]">' + product.lenses[1] +'</select>' + 
-                  '</li>' +
-               '<li><strong>Name :</strong>' +product.name +' </li>' +
-               '<li><strong>Price :</strong>' +product.price/100+'€' +' </li>' +
-               '<li><strong>Description :</strong>' +product.description +' </li>' +
-               '</ul>'
-               '</div>'
-
-                    }
-                    document.getElementById('product').innerHTML = output ;
-
-
-  };
-
-   request.send();
- 
-}
-
-getProduct();
-
+  
 //const carts = document.getElementsByClassName('btn');
 //for(i=0; i<products.length; i++){
 //fetch('http://localhost:3000/api/cameras/'+id1)
