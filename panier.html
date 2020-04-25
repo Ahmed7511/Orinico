@@ -3,9 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet"  href="style.css" >
     <title>Orinico-panier</title>
 </head>
 <body>
+    <header>
+    <nav>
+        <ul> 
+         <li><span href="index.html">Orinico</span></li>
+         <li class="cart">
+          <a href="panier.html">
+           <i class="fas fa-shopping-cart"></i>panier<span>0</span>
+              </a>
+         </li>
+       </ul>
+      </nav>
+    </header>
     
+
+
+
+
+
+
+
+
+
+
+<script>
+    function onloadCartNumbers(){
+  let productNumbers = localStorage.getItem('cartNumbers');
+if(productNumbers){
+  document.querySelector('.cart span').textContent = productNumbers ; 
+}
+}
+onloadCartNumbers();
+</script>
+
+
+
+
+
+
 </body>
 </html>

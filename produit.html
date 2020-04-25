@@ -27,7 +27,6 @@
   </header>
  <h1> Choisir ce produit</h1>
 
- <h2> Une sélection de produits pour photographe.</h2>
   <p>Personnaliser votre produit  </p>
 <div id="product" >
 
@@ -36,7 +35,7 @@
 
 
 
-                   <div id="btn"><a class = "add-cart" href="panier.html">Ajouter au panier</a></div>
+                  <a id = "add-cart" href="panier.html">Ajouter au panier</a>
 
 
 
@@ -84,7 +83,6 @@ request.onload = function (){
                '<li><strong>Name :</strong>' +product.name +' </li>' +
                  '<li><strong>Price :</strong>' +product.price/100+'€' +' </li>' +
                   '<li><strong>Description :</strong>' +product.description +' </li>' +
-                  
                   '</ul>' +
                   '</div>'
 
@@ -99,22 +97,39 @@ request.send();
 }
 
 main();
-
-let cart = document.getElementById('btn');
+let cart = document.getElementById('add-cart');
 
 cart.addEventListener('click', () =>{
-  cartNumbers();
+     cartNumbers(product); // on click on lance la function
 })
-console.log(typeof cartNumbers)
 
- function cartNumbers() {
-   let productNumbers = localStorage.getItem('cartNumbers');
-   console.log(productNumbers);
-  localStorage.setItem('cartNumbers', 1)
-
- 
+function onloadCartNumbers(){
+  let productNumbers = localStorage.getItem('cartNumbers');
+if(productNumbers){
+  document.querySelector('.cart span').textContent = productNumbers ; 
+}
 }
 
+function cartNumbers(product){
+ 
+let productNumbers = localStorage.getItem('cartNumbers');
+console.log(productNumbers)
+productNumbers = parseInt(productNumbers);            // converti le productNumbers en numéro 
+if(productNumbers){
+
+localStorage.setItem('cartNumbers',productNumbers + 1);
+document.querySelector('.cart span').textContent = productNumbers + 1;
+
+}else{
+  localStorage.setItem('cartNumbers', 1);
+  document.querySelector('.cart span').textContent = 1;
+}
+
+}
+
+ localStorage.setItem("mon produit ",JSON.parse.product);
+console.log(localStorage)
+onloadCartNumbers();
 
        </script>
 

@@ -55,6 +55,6 @@ a{
 }
 .social:hover{
     transform: scale(1.1);
-    color: #fff;
+    color: mediumblue;
     transition : 300ms ease ;
 }
