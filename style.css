@@ -13,7 +13,7 @@ nav li{
      color: #fff;
 }
 
-h1, h2{
+h1, h2, h3 , p{
     text-align: center;
    color: #fff;
 }
@@ -38,7 +38,7 @@ a{
     height: 30px;
   margin: 20px;
 }
-.socials{
+ .socials{
     display: flex;
     justify-content: center;
     background-color: lightcoral;
