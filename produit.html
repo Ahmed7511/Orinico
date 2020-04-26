@@ -35,7 +35,7 @@
 
 
 
-                  <a id = "add-cart" href="panier.html">Ajouter au panier</a>
+                  <div id="add-cart"><a class="add-card" href="panier.html">Ajouter au panier</a></div>
 
 
 
@@ -83,6 +83,7 @@ request.onload = function (){
                '<li><strong>Name :</strong>' +product.name +' </li>' +
                  '<li><strong>Price :</strong>' +product.price/100+'€' +' </li>' +
                   '<li><strong>Description :</strong>' +product.description +' </li>' +
+                  '<li>inCart = 0 </li>'
                   '</ul>' +
                   '</div>'
 
@@ -97,8 +98,7 @@ request.send();
 }
 
 main();
-let cart = document.getElementById('add-cart');
-
+let cart = document.getElementById('add-cart');   
 cart.addEventListener('click', () =>{
      cartNumbers(product); // on click on lance la function
 })
@@ -124,11 +124,10 @@ document.querySelector('.cart span').textContent = productNumbers + 1;
   localStorage.setItem('cartNumbers', 1);
   document.querySelector('.cart span').textContent = 1;
 }
-
+   setItems();
 }
 
- localStorage.setItem("mon produit ",JSON.parse.product);
-console.log(localStorage)
+
 onloadCartNumbers();
 
        </script>
