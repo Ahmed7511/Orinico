@@ -20,7 +20,16 @@
       </nav>
     </header>
     
+    <div id="product">
+      <ul>
+    <li><strong>ID :</strong>   </li>
+     <li><strong>Lentille :</strong>  </li>
+       <li><strong>Name :</strong> </li>
+         <li><strong>Price :</strong> </li>
+          <li><strong>Description :</strong> </li>
+          </ul>
 
+        </div>
 
 
 
@@ -31,13 +40,33 @@
 
 
 <script>
-    function onloadCartNumbers(){
+   function onloadCartNumbers(){
   let productNumbers = localStorage.getItem('cartNumbers');
 if(productNumbers){
   document.querySelector('.cart span').textContent = productNumbers ; 
 }
+
 }
+  function displayCart(){
+  let cartItems = localStorage.getItem("productInCart");
+  cartItems = JSON.parse(cartItems);
+  let product = document.getElementById('product');
+ console.log(productData)
+     if(cartItems && product){
+       product.innerHTML = '';
+         Object.value(cartItems).map(item =>{ 
+       product.innerHTML += '
+          <div class ="product">${product.name}</div> '
+              
+       
+
+
+              });
+}
+  }
+displayCart();
 onloadCartNumbers();
+   
 </script>
 
 
