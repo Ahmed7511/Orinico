@@ -116,17 +116,15 @@ document.querySelector('.cart span').textContent = productNumbers + 1;
   localStorage.setItem('cartNumbers', 1);
   document.querySelector('.cart span').textContent = 1;
 }
-   setItems();
 }
  
-function setItems(){
 
-  productData.incart = 1;
+let cartItems = localStorage.getItem('prodctInCart');
 
-  localStorage.setItem("productInCart",JSON.stringify(productData)) //-------- passé le productData en json--------//
-}
 
-console.log(productData._id)
+  localStorage.setItem("productsInCart",JSON.stringify(productData)) //-------- passé le productData en json--------//
+
+
 
 
 

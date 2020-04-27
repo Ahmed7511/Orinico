@@ -21,16 +21,21 @@
     </header>
     
     <div id="product">
-      <ul>
-    <li><strong>ID :</strong>   </li>
-     <li><strong>Lentille :</strong>  </li>
-       <li><strong>Name :</strong> </li>
-         <li><strong>Price :</strong> </li>
-          <li><strong>Description :</strong> </li>
-          </ul>
-
         </div>
+  
+        <form id ="formulaire">
+          <input type="text" name="nom" placeholder="Nom"><br>
+           <input type="text" name="prenom" placeholder="Prenom"><br>
+           <input type="email" name="email" ><br>
+           <input type="number" name="telephone"><br>
+         <p> l'adresse du livraison</p>
+            <input type="text" name=" rue" ><br>
+              <input type="text" name=" ville" ><br>
+              <input type="text" name="pays" ><br>
 
+          <input type="submit" value="envoyer">
+
+        </form>
 
 
 
@@ -48,24 +53,45 @@ if(productNumbers){
 
 }
   function displayCart(){
-  let cartItems = localStorage.getItem("productInCart");
+  let cartItems = localStorage.getItem("productsInCart");
   cartItems = JSON.parse(cartItems);
   let product = document.getElementById('product');
- console.log(productData)
-     if(cartItems && product){
-       product.innerHTML = '';
-         Object.value(cartItems).map(item =>{ 
-       product.innerHTML += '
-          <div class ="product">${product.name}</div> '
+
+   if(cartItems && product){
+      var output=""
+    output += '<div class="product">'+
+              '<img src="' + cartItems.imageUrl+'">' +
+              '<ul>' +
+         
+               '<li><strong>Name :</strong>'  + cartItems.name +' </li>' +
+                 '<li><strong>Price :</strong>' +cartItems.price/100+'€' +' </li>' +
+                  '</ul>' +
+
+                  '</div>'              
+      
               
-       
+           }
 
+           document.getElementById('product').innerHTML = output ;
 
-              });
-}
   }
+
+
+
+
+
+
+
+
+
 displayCart();
 onloadCartNumbers();
+
+
+document.getElementById('formulaire').addEventListener('submit', () =>{
+  alert('envoyer')
+});
+Console.log(input);
    
 </script>
 
