@@ -16,7 +16,7 @@
   <header>
     <nav>
       <ul> 
-       <li><span href="index.html">Orinico</span></li>
+       <li><a href="index.html">Orinico</a></li>
        <li class="cart">
         <a href="panier.html">
          <i class="fas fa-shopping-cart"></i>panier<span>0</span>
@@ -35,7 +35,7 @@
 
 
 
-                  <div id="add-cart"><a class="add-card" href="panier.html">Ajouter au panier</a></div>
+                  <div id="add-cart"><a class="add-card" >Ajouter au panier</a></div>
 
 
 
@@ -58,13 +58,11 @@
 
              <script >
                const lien = window.location.search.substring(4)
-
-       function main(){
-
+               let liens = ['5be1ed3f1c9d44000030b06' , '5be1ef211c9d44000030b062', '5be9bc241c9d440000a730e7', '5be9c4471c9d440000a730e8' , '5be9c4c71c9d440000a730e9']
+               function main(){
        var request = new XMLHttpRequest();
 
        request.open('GET' , 'http://localhost:3000/api/cameras/'+ lien);
-
 
 request.onload = function (){
 
@@ -76,12 +74,15 @@ request.onload = function (){
               '<ul>' +
              '<li><strong>ID :</strong>' +productData._id +' </li>' +
              '<li><strong>Lentille :</strong>' +
-              '<select><option name="lentille" value ="lenses[0]"> ' +
+        
+              '<select id ="choix" onchange ="change()"><option name="lentille" value ="lenses[0]"> ' +
                  productData.lenses[0] +'<option name="lentille" value="lenses[1]">' + productData.lenses[1] +'</select>' + 
-                '</li>' +
+              
+                '<label id="lentille" ></label></li>' +
                '<li><strong>Name :</strong>' +productData.name +' </li>' +
-                 '<li><strong>Price :</strong>' +productData.price/100+'€' +' </li>' +
+                 '<li id="price"><strong>Total :</strong>' +productData.price/100+'€' +' </li>' +
                   '<li><strong>Description :</strong>' +productData.description +' </li>' +
+                  '<li id="inCart" >0</li>'
                   '</ul>' +
 
                   '</div>'
@@ -89,47 +90,49 @@ request.onload = function (){
                       }
                     document.getElementById('product').innerHTML = output ;
 
-
                 
 let cart = document.getElementById('add-cart');   
 cart.addEventListener('click', () =>{
-     cartNumbers(product); // on click on lance la function
+     cartNumbers(productData[i]); // on click on lance la function
 })
 
+console.log(productData)
 function onloadCartNumbers(){
   let productNumbers = localStorage.getItem('cartNumbers');
 if(productNumbers){
   document.querySelector('.cart span').textContent = productNumbers ; 
 }
+
 }
-function cartNumbers(product){
- 
+
+function cartNumbers(productData){
 let productNumbers = localStorage.getItem('cartNumbers');
-console.log(productNumbers)
 productNumbers = parseInt(productNumbers);            // converti le productNumbers en numéro 
 if(productNumbers){
 
 localStorage.setItem('cartNumbers',productNumbers + 1);
 document.querySelector('.cart span').textContent = productNumbers + 1;
-
 }else{
   localStorage.setItem('cartNumbers', 1);
   document.querySelector('.cart span').textContent = 1;
 }
+let cartCost = localStorage.getItem("totalCost");
+  //console.log(typeof cartCost)
+  if(cartCost != null){
+    cartCost = parseInt(cartCost);
+console.log(cartCost)
+    localStorage.setItem("totalCost", cartCost + productData.price/100 )
+  }else{
+  localStorage.setItem("totalCost", productData.price/100)
+  }
+
 }
- 
-
-let cartItems = localStorage.getItem('prodctInCart');
-
+let cartItems = localStorage.getItem('productsInCart');
+cartItems = JSON.parse(cartItems);
+let inCart = document.getElementById('inCart');
 
   localStorage.setItem("productsInCart",JSON.stringify(productData)) //-------- passé le productData en json--------//
-
-
-
-
-
-
-
+ 
 
 
 

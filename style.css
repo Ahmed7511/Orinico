@@ -58,3 +58,6 @@ a{
     color: mediumblue;
     transition : 300ms ease ;
 }
+#formulaire{
+    text-align: center;
+}
