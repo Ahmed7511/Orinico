@@ -57,9 +57,11 @@
   
 
              <script >
+            //let liens = ['5be1ed3f1c9d44000030b06' , '5be1ef211c9d44000030b062', '5be9bc241c9d440000a730e7', '5be9c4471c9d440000a730e8' , '5be9c4c71c9d440000a730e9']
+
                const lien = window.location.search.substring(4)
-               let liens = ['5be1ed3f1c9d44000030b06' , '5be1ef211c9d44000030b062', '5be9bc241c9d440000a730e7', '5be9c4471c9d440000a730e8' , '5be9c4c71c9d440000a730e9']
-               function main(){
+               
+       function main(){
        var request = new XMLHttpRequest();
 
        request.open('GET' , 'http://localhost:3000/api/cameras/'+ lien);
@@ -80,9 +82,8 @@ request.onload = function (){
               
                 '<label id="lentille" ></label></li>' +
                '<li><strong>Name :</strong>' +productData.name +' </li>' +
-                 '<li id="price"><strong>Total :</strong>' +productData.price/100+'€' +' </li>' +
+                 '<li id="price"><strong>price:</strong>' +productData.price/100+'€' +' </li>' +
                   '<li><strong>Description :</strong>' +productData.description +' </li>' +
-                  '<li id="inCart" >0</li>'
                   '</ul>' +
 
                   '</div>'
@@ -91,12 +92,13 @@ request.onload = function (){
                     document.getElementById('product').innerHTML = output ;
 
                 
-let cart = document.getElementById('add-cart');   
-cart.addEventListener('click', () =>{
-     cartNumbers(productData[i]); // on click on lance la function
-})
+let carts = document.querySelectorAll('div > a');  
 
-console.log(productData)
+for(let i=0; i < carts.length; i++){
+  carts[i].addEventListener('click', () =>{
+  cartNumbers(productData); // on click on lance la function
+})
+}
 function onloadCartNumbers(){
   let productNumbers = localStorage.getItem('cartNumbers');
 if(productNumbers){
@@ -106,7 +108,8 @@ if(productNumbers){
 }
 
 function cartNumbers(productData){
-let productNumbers = localStorage.getItem('cartNumbers');
+
+  let productNumbers = localStorage.getItem('cartNumbers');
 productNumbers = parseInt(productNumbers);            // converti le productNumbers en numéro 
 if(productNumbers){
 
@@ -116,6 +119,20 @@ document.querySelector('.cart span').textContent = productNumbers + 1;
   localStorage.setItem('cartNumbers', 1);
   document.querySelector('.cart span').textContent = 1;
 }
+
+
+function setItems(productData){
+
+  let cartItems = localStorage.getItem('productsInCart');
+  cartItems = productData ;
+          
+
+  localStorage.setItem('productInCart',JSON.stringify(cartItems)) //-------- passé le productData en json--------//
+}
+setItems(productData) ;
+
+
+
 let cartCost = localStorage.getItem("totalCost");
   //console.log(typeof cartCost)
   if(cartCost != null){
@@ -127,11 +144,7 @@ console.log(cartCost)
   }
 
 }
-let cartItems = localStorage.getItem('productsInCart');
-cartItems = JSON.parse(cartItems);
-let inCart = document.getElementById('inCart');
 
-  localStorage.setItem("productsInCart",JSON.stringify(productData)) //-------- passé le productData en json--------//
  
 
 
@@ -154,7 +167,6 @@ request.send();
  
 }
 main();
-
        </script>
 
 

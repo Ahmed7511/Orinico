@@ -20,9 +20,24 @@
        </ul>
       </nav>
     </header>
+    <div class="product-container">
+      <div class="product-header">
+        <h5 class="product-title">PRODUCT</h5>
+        <h5 class="price">PRICE</h5>
+        <h5 class="quantity">QUANTITY</h5>
+        <h5 class="total">TOTAL</h5>
+      </div>
     
-    <div id="product">
-        </div>
+
+
+       <div class="product">
+
+       </div>
+            
+    </div>
+  
+
+    
   
         <form id ="formulaire">
         <p>
@@ -69,6 +84,34 @@
 
 
 <script>
+  function displayCart(){
+    let cartItems = localStorage.getItem('productInCart');
+    cartItems = JSON.parse(cartItems);
+
+    let product = document.querySelector('.product');
+
+if(cartItems && product){
+   var output=""
+ output += '<div class="products">'+
+           '<img src="' + cartItems.imageUrl+'" width= 70px >' +
+           
+            '<strong>Name :</strong>'  + cartItems.name +
+              
+
+               '</div>'  +
+               '<div class="price">' +cartItems.price/100+'€' +' </div>' +
+               '<div class="quantity"><i class="far fa-plus-square"></i> 1  <i class="fas fa-minus-circle"></i></div>' 
+ 
+        
+   
+           
+            }
+
+        document.querySelector('.product').innerHTML = output ;
+
+}
+
+    
    function onloadCartNumbers(){
   let productNumbers = localStorage.getItem('cartNumbers');
 if(productNumbers){
@@ -76,35 +119,10 @@ if(productNumbers){
 }
 
 }
-  function displayCart(){
-  let cartItems = localStorage.getItem("productsInCart");
-  cartItems = JSON.parse(cartItems);
-  let product = document.getElementById('product');
-
-   if(cartItems && product){
-      var output=""
-    output += '<div class="product">'+
-              '<img src="' + cartItems.imageUrl+'">' +
-              '<ul>' +
-               '<li><strong>Name :</strong>'  + cartItems.name +' </li>' +
-                 '<li><strong>price  :</strong>' +cartItems.price/100+'€' +' </li>' +
-                 '<li><i class="far fa-plus-square"></i> 1  <i class="fas fa-minus-circle"></i></li>' +
-                 '</ul>' +
-
-                  '</div>'              
-      
-              
-           }
-
-           document.getElementById('product').innerHTML = output ;
-
-  }
-
-  
-displayCart();
+ 
 onloadCartNumbers();
 
-
+displayCart();
    
 </script>
 
