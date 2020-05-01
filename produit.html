@@ -16,7 +16,7 @@
   <header>
     <nav>
       <ul> 
-       <li><span href="index.html">Orinico</span></li>
+       <li><a href="index.html">Orinico</a></li>
        <li class="cart">
         <a href="panier.html">
          <i class="fas fa-shopping-cart"></i>panier<span>0</span>
@@ -27,7 +27,6 @@
   </header>
  <h1> Choisir ce produit</h1>
 
- <h2> Une sélection de produits pour photographe.</h2>
   <p>Personnaliser votre produit  </p>
 <div id="product" >
 
@@ -36,11 +35,11 @@
 
 
 
-                   <div id="btn"><a class = "add-cart" href="panier.html">Ajouter au panier</a></div>
+                  <div id="add-cart"><a class="add-card" onchange="change()" >Ajouter au panier</a></div>
 
 
 
-          <aside>
+          <aside>''
               <h3>Toute l'équipe d'Orinoco vous remercie de votre visite.</h3>
           </aside>
   
@@ -58,64 +57,124 @@
   
 
              <script >
+
                const lien = window.location.search.substring(4)
-
+               
        function main(){
-
        var request = new XMLHttpRequest();
-
+ 
        request.open('GET' , 'http://localhost:3000/api/cameras/'+ lien);
-
 
 request.onload = function (){
 
   if(this.status == 200){
-    var product = JSON.parse(request.responseText);
-
+    var productData = JSON.parse(request.responseText);
     var output=""
     output += '<div class="product">'+
-              '<img src="' + product.imageUrl+'">' +
+              '<img src="' + productData.imageUrl+'">' +
               '<ul>' +
-             '<li><strong>ID :</strong>' +product._id +' </li>' +
+             '<li><strong>ID :</strong>' +productData._id +' </li>' +
              '<li><strong>Lentille :</strong>' +
-              '<select><option name="lentille" value ="lenses[0]"> ' +
-                 product.lenses[0] +'<option name="lentille" value="lenses[1]">' + product.lenses[1] +'</select>' + 
-                '</li>' +
-               '<li><strong>Name :</strong>' +product.name +' </li>' +
-                 '<li><strong>Price :</strong>' +product.price/100+'€' +' </li>' +
-                  '<li><strong>Description :</strong>' +product.description +' </li>' +
-                  
+               
+               '<select id ="ddselect" onchange="change();" >' +
+                       '<option > ' + productData.lenses[0] +' </option>' +
+                       '<option > ' + productData.lenses[1] +' </option>' + 
+                       '<option > ' + productData.lenses[2] + ' </option>' + 
+                '</select>' + 
+                 //   '<input type="text" id ="txtvalue">' + 
+                
+               '<li><strong>Name :</strong>' +productData.name +' </li>' +
+                 '<li id="price"><strong>price:</strong>' +productData.price/100+'€' +' </li>' +
+                  '<li><strong>Description :</strong>' +productData.description +' </li>' +
+                   '<li><strong>Quantité : </strong>' + productData.quantity + '</li>' +
                   '</ul>' +
-                  '</div>'
 
+                  '</div>'
+               
                       }
                     document.getElementById('product').innerHTML = output ;
 
+                      
+let carts = document.querySelectorAll('div > a');  
 
-                };
+for(let i=0; i < carts.length; i++){
+  carts[i].addEventListener('click', () =>{
+  cartNumbers(productData); // on click on lance la function
+})
+}
+function onloadCartNumbers(){
+  let productNumbers = localStorage.getItem('cartNumbers');
+if(productNumbers){
+  document.querySelector('.cart span').textContent = productNumbers ; 
+}
+
+}
+
+function cartNumbers(productData){
+
+  let productNumbers = localStorage.getItem('cartNumbers');
+productNumbers = parseInt(productNumbers);            // converti le productNumbers en numéro 
+if(productNumbers){
+
+localStorage.setItem('cartNumbers',productNumbers + 1);
+document.querySelector('.cart span').textContent = productNumbers + 1;
+
+}else{
+  localStorage.setItem('cartNumbers', 1);
+  document.querySelector('.cart span').textContent = 1;
+}
+
+function setItems(productData){
+  let cartItems = JSON.parse(localStorage.getItem('productInCart')) || [];
+
+  cartItems.push({[productData.name]: productData});                
+     localStorage.setItem('productInCart',JSON.stringify(cartItems)) || [];  
+     //let productData.quantity = 1 ;
+
+          
+
+}
+setItems(productData) ;
+
+
+let cartCost = localStorage.getItem("totalCost");
+  //console.log(typeof cartCost)
+  if(cartCost != null){
+    cartCost = parseInt(cartCost);
+    localStorage.setItem("totalCost", cartCost + productData.price/100 )
+  }else{
+  localStorage.setItem("totalCost", productData.price/100)
+  }
+
+}
+
+ 
+
+
+
+onloadCartNumbers();
+
+
+
+
+
+
+
+
+};
+
 
 request.send();
+
  
 }
-
 main();
 
-let cart = document.getElementById('btn');
-
-cart.addEventListener('click', () =>{
-  cartNumbers();
-})
-console.log(typeof cartNumbers)
-
- function cartNumbers() {
-   let productNumbers = localStorage.getItem('cartNumbers');
-   console.log(productNumbers);
-  localStorage.setItem('cartNumbers', 1)
-
- 
-}
-
-
+function change(){
+  var d = document.getElementById('ddselect'); 
+  d.options[d.selectedIndex].text ;
+ // document.getElementById('txtvalue').value = displaytext ;
+} 
        </script>
 
 

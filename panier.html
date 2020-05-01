@@ -3,9 +3,134 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/c10c83c5b7.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet"  href="style.css" >
     <title>Orinico-panier</title>
 </head>
 <body>
+    <header>
+    <nav>
+        <ul> 
+         <li><a href="index.html">Orinico</a></li>
+         <li class="cart">
+          <a href="panier.html">
+           <i class="fas fa-shopping-cart"></i>panier<span>0</span>
+              </a>
+         </li>
+       </ul>
+      </nav>
+    </header>
+    <div class="product-container">
+      <div class="product-header">
+        <h5 class="product-title">PRODUCT</h5>
+        <h5 class="price">PRICE</h5>
+        <h5 class="quantity">QUANTITY</h5>
+        <h5 class="total">TOTAL</h5>
+      </div>
     
+
+
+       <div class="products">
+
+       </div>
+            
+    </div>
+  
+
+    
+  
+        <form id ="formulaire">
+        <p>
+          <label>NOM</label><br>
+         <input type="text" name="nom" placeholder="Nom" required><br>
+        <label>PRENOM</label><br>
+         <input type="text" name="prenom" placeholder="Prenom" required><br>
+          <label>EMAIL</label><br>
+           <input type="email" name="email" required><br>
+           <label>TELEPHONE(optionnel)</label><br>
+            <input type="number" name="telephone" ><br>
+         <br> l'adresse du livraison<br>
+             <label>RUE</label><br>
+              <input type="text" name=" rue" required><br>
+             <label>VILLE</label><br>
+              <input type="text" name=" ville" required><br>
+            <label>PAYS</label><br>
+             <input type="text" name="pays" required><br><br>
+         </p>
+          <input type="submit" value="envoyer">
+
+        </form>
+
+        <aside>
+          <h3>Toute l'équipe d'Orinoco vous remercie de votre visite.</h3>
+      </aside>
+
+
+       <footer class="socials">
+                           <a class="social" href="index.html"><span class="fa fa-twitter"></span><br>twitter</a>
+  
+                            <a class="social" href="index.html"><span class="fa fa-facebook"></span><br>facebook</a>
+
+                            <a class="social" href="index.html"><span class="fa fa-dribbble"></span><br>dribbble</a>
+
+                            <a class="social" href="index.html"><span class="fa fa-instagram"></span><br>instagram</a>  
+        </footer>
+        
+
+
+
+
+
+
+
+<script>
+  function displayCart(){
+    cartItems = localStorage.getItem('productInCart');
+    
+    cartItems = JSON.parse(cartItems);
+
+    let product = document.querySelector('.products');
+
+if(cartItems && product){
+   var output=""
+ output += '<div class="product">'+
+           '<img src="' + cartItems.imageUrl+'" width= 70px >' +
+           
+            '<strong>Name :</strong>'  + cartItems.name +
+              
+
+               '</div>'  +
+               '<div class="price">' +cartItems.price/100+'€' +' </div>' +
+               '<div class="quantity"><i class="far fa-plus-square"></i> 1  <i class="fas fa-minus-circle"></i></div>' 
+ 
+        
+   
+           
+            }
+
+        document.querySelector('.products').innerHTML = output ;
+
+}
+
+    
+   function onloadCartNumbers(){
+  let productNumbers = localStorage.getItem('cartNumbers');
+if(productNumbers){
+  document.querySelector('.cart span').textContent = productNumbers ; 
+}
+
+}
+ 
+onloadCartNumbers();
+  
+displayCart();
+   
+</script>
+
+
+
+
+
+
 </body>
 </html>
