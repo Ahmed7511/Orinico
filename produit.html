@@ -126,12 +126,17 @@ document.querySelector('.cart span').textContent = productNumbers + 1;
 
 function setItems(productData){
   let cartItems = JSON.parse(localStorage.getItem('productInCart')) || [];
+   productData.quantity = 0 ;
+if(productData){
+    productData.quantity = +1 ;
+}else{
+  cartItems.push(productData);                
 
-  cartItems.push({[productData.name]: productData});                
-     localStorage.setItem('productInCart',JSON.stringify(cartItems)) || [];  
-     //let productData.quantity = 1 ;
+     productData.quantity += 1 ;
+}
 
-          
+localStorage.setItem('productInCart',JSON.stringify(cartItems)) || [];  
+  
 
 }
 setItems(productData) ;
