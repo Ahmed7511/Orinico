@@ -30,7 +30,7 @@
     
 
 
-       <div class="product">
+       <div class="products">
 
        </div>
             
@@ -85,15 +85,15 @@
 
 <script>
   function displayCart(){
+    cartItems = localStorage.getItem('productInCart');
     
-     cartItems = localStorage.getItem('productZurss 50S')
     cartItems = JSON.parse(cartItems);
 
-    let product = document.querySelector('.product');
+    let product = document.querySelector('.products');
 
 if(cartItems && product){
    var output=""
- output += '<div class="products">'+
+ output += '<div class="product">'+
            '<img src="' + cartItems.imageUrl+'" width= 70px >' +
            
             '<strong>Name :</strong>'  + cartItems.name +
@@ -108,7 +108,7 @@ if(cartItems && product){
            
             }
 
-        document.querySelector('.product').innerHTML = output ;
+        document.querySelector('.products').innerHTML = output ;
 
 }
 

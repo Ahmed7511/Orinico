@@ -35,7 +35,7 @@
 
 
 
-                  <div id="add-cart"><a class="add-card" >Ajouter au panier</a></div>
+                  <div id="add-cart"><a class="add-card" onchange="change()" >Ajouter au panier</a></div>
 
 
 
@@ -75,16 +75,18 @@ request.onload = function (){
               '<ul>' +
              '<li><strong>ID :</strong>' +productData._id +' </li>' +
              '<li><strong>Lentille :</strong>' +
-               //
-               '<select id ="select" ><option name="lentille" value ="lenses[0]"> ' +
-                 productData.lenses[0] + '<option name="lentille" value ="lenses[1]"> ' +
-                 productData.lenses[1] +
-                        '</select>' + 
+               
+               '<select id ="ddselect" onchange="change();" >' +
+                       '<option > ' + productData.lenses[0] +' </option>' +
+                       '<option > ' + productData.lenses[1] +' </option>' + 
+                       '<option > ' + productData.lenses[2] + ' </option>' + 
+                '</select>' + 
+                 //   '<input type="text" id ="txtvalue">' + 
                 
-                '<label id="lentille" ></label></li>' +
                '<li><strong>Name :</strong>' +productData.name +' </li>' +
                  '<li id="price"><strong>price:</strong>' +productData.price/100+'€' +' </li>' +
                   '<li><strong>Description :</strong>' +productData.description +' </li>' +
+                   '<li><strong>Quantité : </strong>' + productData.quantity + '</li>' +
                   '</ul>' +
 
                   '</div>'
@@ -92,13 +94,8 @@ request.onload = function (){
                       }
                     document.getElementById('product').innerHTML = output ;
 
-                //    function change(){
- // var select = document.getElementById('select'); 
- // alert(select.option[select.selectedIndex].value)
-//}
-                  //  change();              
+                      
 let carts = document.querySelectorAll('div > a');  
-
 
 for(let i=0; i < carts.length; i++){
   carts[i].addEventListener('click', () =>{
@@ -128,11 +125,12 @@ document.querySelector('.cart span').textContent = productNumbers + 1;
 }
 
 function setItems(productData){
-  let cartItems = JSON.parse(localStorage.getItem('product'+ productData.name));
-    cartItems =  productData 
-                      
-       localStorage.setItem('product'+ productData.name,JSON.stringify(cartItems));  
-             
+  let cartItems = JSON.parse(localStorage.getItem('productInCart')) || [];
+
+  cartItems.push({[productData.name]: productData});                
+     localStorage.setItem('productInCart',JSON.stringify(cartItems)) || [];  
+     //let productData.quantity = 1 ;
+
           
 
 }
@@ -172,6 +170,11 @@ request.send();
 }
 main();
 
+function change(){
+  var d = document.getElementById('ddselect'); 
+  d.options[d.selectedIndex].text ;
+ // document.getElementById('txtvalue').value = displaytext ;
+} 
        </script>
 
 
