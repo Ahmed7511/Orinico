@@ -61,19 +61,15 @@ a{
 
 /*-------------------------------------page panier --------------------------*/
 
-#formulaire{
-    text-align: center;
-}
-
 .products-container{
     max-width: 650px;
-    justify-content: space-evenly;
+    justify-content: space-between;
     margin: 0 auto;
     margin-top: 50px;
     display: flex;
 
 }
-.product-header{
+.products-panier , .product-header{
     width: 100%;
     max-width: 650px;
     display: flex;
@@ -81,24 +77,24 @@ a{
     border-bottom: 2px solid #fff ;
     margin: 0 auto;
 }
-.product-title{
-    width: 45%;
+.name-product,.product-title{
+    width: 40%;
 }
-.price{
+.price-product,.price{
     width: 15%;
     display: flex;
     align-items: center;
 }
-.quantity{
+.quantity-product, .quantity{
  width: 30%;
 align-items: center;
 
 }
-.total{
+.total-product,.total{
     width: 15%;
     align-items: center;
 }
-.products{
-    width: 100%;
-    display: flex;
+
+#formulaire{
+    text-align: center;
 }

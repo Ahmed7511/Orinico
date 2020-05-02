@@ -20,7 +20,7 @@ $(function(){
                    '<option > ' + product.lenses[1] +' </option>' + 
                    '<option > ' + product.lenses[2] + ' </option>' + 
             '</select>' + 
-            '<li><strong>Quantité : </strong> <input id="quantity"> </input></li>' +
+            '<li><strong>Quantité : </strong> <input id="quantity" type ="number" </input></li>' +
 
           '</ul>' +
     
@@ -33,79 +33,94 @@ $(function(){
     let carts = document.querySelectorAll('div > a');  
    for(let i=0; i< carts.length; i++){
     carts[i].addEventListener('click', () =>{
-        totalCart(product); // on click on lance la function
+      setItems(product);
+      // on click on lance la function
       })
     }
+      function setItems(product){
+        let quantity = document.getElementById('quantity').value;
+            if(quantity < 1){
+                alert('veuillez choisir une quantité s\'il vous plait !!') 
+                event.preventDefault();
+           }else{
+            totalCart(product); 
+
       function totalCart(product){
 
-        let productNumbers = localStorage.getItem('totalCart');
-      productNumbers = parseInt(productNumbers);            // converti le productNumbers en numéro 
-      if(productNumbers){
+        let cartItemsQuantityNumber = localStorage.getItem('totalCart');
+        cartItemsQuantityNumber = parseInt(cartItemsQuantityNumber);            // converti le productNumbers en numéro 
+      if(cartItemsQuantityNumber){
       
-      
-      localStorage.setItem('totalCart',productNumbers + 1);
-      document.querySelector('.cart span').textContent = productNumbers + 1;
+      localStorage.setItem('totalCart',cartItemsQuantityNumber + 1);
+      document.querySelector('.cart span').textContent = cartItemsQuantityNumber + 1;
       
       }else{
         localStorage.setItem('totalCart', 1);
         document.querySelector('.cart span').textContent = 1;
       }
-      setItems(product);
-      function setItems(product){
-        let quantity = document.getElementById('quantity').value;
-   if(quantity >1){
-       alert('vous avez pas choisi une quantity !!')
-   }else{
-    let cart = {
-        "id" : product._id ,
-        "name" : product.name ,
-        "price" : product.price , 
-        "description" : product.description ,
-        "quantity" : quantity,
-        "imageURL" : product.imageUrl
-    } 
+           let cart = {
+                 "id" : product._id ,                     
+                 "name" : product.name ,
+                "price" : product.price , 
+                "description" : product.description ,
+                  "quantity" : quantity,
+                "imageURL" : product.imageUrl
+                 } 
   
-          let cartItems =  JSON.parse(localStorage.getItem('productInCart')) || [];
-          if (localStorage.getItem('productInCart') === null) {   /* Si le localStorage est vide */
+                  let cartItems =  JSON.parse(localStorage.getItem('productInCart')) || [];
+                  if (localStorage.getItem('productInCart') === null) {   /* Si le localStorage est vide */
          
-              cartItems.push(cart)   // On va ajouter le produit actuel à l'array cartItems
-              localStorage.setItem("productInCart", JSON.stringify(cart)) || []; 
-        }else{
-              let itemHasChanged = false; // Cette déclaration servira pour contrôler les doublons
+                 cartItems.push(cart)   // On va ajouter le produit actuel à l'array cartItems
+                  localStorage.setItem("productInCart", JSON.stringify(cart)) || []; 
+                 }else{
+                      let itemHasChanged = false; // Cette déclaration servira pour contrôler les doublons
                             
-           for(let i = 0; i < cartItems.length; i++) {   
-            // en fonction de la quantité de produits dans le localStorage
-            // S'il y a déjà un item avec un nom ET un id identique
-              if((cartItems[i].name == cart.name) && cartItems[i]._id == cart._id) { 
+                     for(let i = 0; i < cartItems.length; i++) {   // en fonction de la quantité de produits dans le localStorage
+            
+                     // S'il y a déjà un item avec un nom ET un id identique
+                      if((cartItems[i].name == cart.name) && cartItems[i]._id == cart._id) { 
                   
-        let cartItemsQuantityNumber = Number(cartItems[i].quantity); 
-        // On récupère la quantité du produit en cours d'ajout
-        let cartQuantityNumber = Number(cart.quantity);   
-        // Ainsi que la quantité de produits identiques déjà présents dans le localStorage
+                      cartItemsQuantityNumber = Number(cartItems[i].quantity); 
+                      //  On récupère la quantité du produit en cours d'ajout
+          
+                     let cartQuantityNumber = Number(cart.quantity);   
+         
+                     // Ainsi que la quantité de produits identiques déjà présents dans le localStorage
     
-        let sumQuantity = cartItemsQuantityNumber + cartQuantityNumber;
-        cartItems[i].quantity = sumQuantity.toString();
-        // Et on remplace la quantité du localStorage par cette nouvelle quantité
-         itemHasChanged = true;  
-              }
+                    let sumQuantity = cartItemsQuantityNumber + cartQuantityNumber;
+                     [i].quantity = sumQuantity.toString();
+                    // Et on remplace la quantité du localStorage par cette nouvelle quantité
+                     itemHasChanged = true;  
+                          }
+
+                       }
+                       if(itemHasChanged == false) {  
+                       // Il y a déjà des produits dans le panier mais pas identiques à ceux qui sont en ajout
+                       cartItems.push(cart);       
+                       // Donc on peut simplement push les nouveaux produits pour les ajouter à l'array cartItems
+                           }
+                         }   
+            
+                     localStorage.setItem("productInCart", JSON.stringify(cartItems));   
+                     // Puis stringify le contenu de cartItems pour l'ajouter au localStorage                      
+                        } 
+        
+                  }      
 
             }
-         if(itemHasChanged == false) {  
-            // Il y a déjà des produits dans le panier mais pas identiques à ceux qui sont en ajout
-            cartItems.push(cart);       
-            // Donc on peut simplement push les nouveaux produits pour les ajouter à l'array cartItems
-                }
-            }   
+
+
+    
+            function onloadCartNumbers(){
+              let cartItemsQuantityNumber = localStorage.getItem('totalCart');
+            if(cartItemsQuantityNumber){
+              document.querySelector('.cart span').textContent = cartItemsQuantityNumber ; 
+            }
             
-         localStorage.setItem("productInCart", JSON.stringify(cartItems));   
-            // Puis stringify le contenu de cartItems pour l'ajouter au localStorage                      
-            } 
-        
-        }      
-
-    }
-
-
+            }
+             
+            onloadCartNumbers();
+              
 
         /*let cartItems = localStorage.getItem(product._id);              
         let dataQuantity = document.getElementById('quantity').value;
