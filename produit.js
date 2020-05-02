@@ -4,7 +4,7 @@ $(function(){
       $.ajax({
         url: 'http://localhost:3000/api/cameras/' + lien,
         type: 'GET',
-        success: function(products){
+        success: function(product){
           $product.append('<div class="product">'+
           '<img src="' + product.imageUrl+'">' +
           '<div>' +
@@ -12,22 +12,128 @@ $(function(){
           '<li><strong>Name :</strong>' +product.name +' </li>' +
           '<li id="price"><strong>price:</strong>' +product.price/100+'€' +' </li>' +
            '<li><strong>Description :</strong>' +product.description +' </li>' +
+           '<li><strong>Lentille :</strong>' +
+               
+           '<select id ="ddselect" onchange="change();" >' +
+           
+                   '<option > ' + product.lenses[0] +' </option>' +
+                   '<option > ' + product.lenses[1] +' </option>' + 
+                   '<option > ' + product.lenses[2] + ' </option>' + 
+            '</select>' + 
+            '<li><strong>Quantité : </strong> <input id="quantity"> </input></li>' +
+
           '</ul>' +
-          '<button><a id ="btn'+[i] +'" href="produit.html?id=' + product._id +'">Séléctionnée</a></button>' +
     
            '</div>'
          );
         
-        }  
-    }) ;                                                  
+
+
+    
+    let carts = document.querySelectorAll('div > a');  
+   for(let i=0; i< carts.length; i++){
+    carts[i].addEventListener('click', () =>{
+        totalCart(product); // on click on lance la function
+      })
+    }
+      function totalCart(product){
+
+        let productNumbers = localStorage.getItem('totalCart');
+      productNumbers = parseInt(productNumbers);            // converti le productNumbers en numéro 
+      if(productNumbers){
+      
+      
+      localStorage.setItem('totalCart',productNumbers + 1);
+      document.querySelector('.cart span').textContent = productNumbers + 1;
+      
+      }else{
+        localStorage.setItem('totalCart', 1);
+        document.querySelector('.cart span').textContent = 1;
+      }
+      setItems(product);
+      function setItems(product){
+        let quantity = document.getElementById('quantity').value;
+   if(quantity >1){
+       alert('vous avez pas choisi une quantity !!')
+   }else{
+    let cart = {
+        "id" : product._id ,
+        "name" : product.name ,
+        "price" : product.price , 
+        "description" : product.description ,
+        "quantity" : quantity,
+        "imageURL" : product.imageUrl
+    } 
+  
+          let cartItems =  JSON.parse(localStorage.getItem('productInCart')) || [];
+          if (localStorage.getItem('productInCart') === null) {   /* Si le localStorage est vide */
+         
+              cartItems.push(cart)   // On va ajouter le produit actuel à l'array cartItems
+              localStorage.setItem("productInCart", JSON.stringify(cart)) || []; 
+        }else{
+              let itemHasChanged = false; // Cette déclaration servira pour contrôler les doublons
+                            
+           for(let i = 0; i < cartItems.length; i++) {   
+            // en fonction de la quantité de produits dans le localStorage
+            // S'il y a déjà un item avec un nom ET un id identique
+              if((cartItems[i].name == cart.name) && cartItems[i]._id == cart._id) { 
+                  
+        let cartItemsQuantityNumber = Number(cartItems[i].quantity); 
+        // On récupère la quantité du produit en cours d'ajout
+        let cartQuantityNumber = Number(cart.quantity);   
+        // Ainsi que la quantité de produits identiques déjà présents dans le localStorage
+    
+        let sumQuantity = cartItemsQuantityNumber + cartQuantityNumber;
+        cartItems[i].quantity = sumQuantity.toString();
+        // Et on remplace la quantité du localStorage par cette nouvelle quantité
+         itemHasChanged = true;  
+              }
+
+            }
+         if(itemHasChanged == false) {  
+            // Il y a déjà des produits dans le panier mais pas identiques à ceux qui sont en ajout
+            cartItems.push(cart);       
+            // Donc on peut simplement push les nouveaux produits pour les ajouter à l'array cartItems
+                }
+            }   
+            
+         localStorage.setItem("productInCart", JSON.stringify(cartItems));   
+            // Puis stringify le contenu de cartItems pour l'ajouter au localStorage                      
+            } 
+        
+        }      
+
+    }
+
+
+
+        /*let cartItems = localStorage.getItem(product._id);              
+        let dataQuantity = document.getElementById('quantity').value;
+      cartItems = product
+     if(localStorage.getItem(product._id) == undefined){
+        localStorage.setItem(product._id, JSON.stringify(cartItems));
+        cartItems.push(localStorage.getItem(product._id));
+        dataQuantity = dataQuantity + 1;  
+     } else if (localStorage.getItem(product._id)){
+        addQuantity();
+         console.log(dataQuantity);
+     }*/
+    
+    
+  
+
+
+
+
+
+
+
+
+    }  
+
+}) ; 
+                                             
 });
-
-
-
-
-
-
-
 
 
 

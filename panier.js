@@ -1,6 +1,28 @@
-function displayCart(){
-    cartItems = localStorage.getItem('productInCart');
-    
+
+    let cartItems = localStorage.getItem("productInCart")|| [];
+    cartItems = JSON.parse(cartItems);
+    let product = document.querySelector('.products');
+    if(cartItems && product){
+        for( i in cartItems){
+        var output=""
+      output += '<div class="product">'+
+                
+                 '<strong>Name :</strong>'  + cartItems[i].name +
+                   
+     
+                    '</div>'  +
+                    '<div class="price">' + cartItems[i].price/100+'€' +' </div>' +
+                    '<div class="quantity"><i class="far fa-plus-square"></i> 1  <i class="fas fa-minus-circle"></i></div>' 
+      
+                    '<div id ="quantity"></div>'
+        }
+                
+                 }
+     
+             document.querySelector('.products').innerHTML = output ;
+
+/*function displayCart(){
+    cartItems = localStorage.getItem("productInCart");
     cartItems = JSON.parse(cartItems);
 
     let product = document.querySelector('.products');
@@ -24,11 +46,11 @@ if(cartItems && product){
 
         document.querySelector('.products').innerHTML = output ;
 
-}
+}*/
 
     
    function onloadCartNumbers(){
-  let productNumbers = localStorage.getItem('cartNumbers');
+  let productNumbers = localStorage.getItem('totalCart');
 if(productNumbers){
   document.querySelector('.cart span').textContent = productNumbers ; 
 }
@@ -37,4 +59,4 @@ if(productNumbers){
  
 onloadCartNumbers();
   
-displayCart();
+//displayCart();
