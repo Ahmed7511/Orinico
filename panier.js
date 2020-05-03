@@ -8,20 +8,35 @@
     productsPanier.innerHTML ='' ;
     Object.values(cartItems).map(cartItem =>
     productsPanier.innerHTML += `
-                     
-                   <div class="name-product">${cartItem.name} </div>  
-                    <div class="price-product"> ${cartItem.price/100}€  </div>
-                    <div class="quantity-product"><i class="far fa-plus-square"></i> ${cartItem.quantity}  <i class="fas fa-minus-circle"></i></div>  
-                    <div class ="total-product" >${cartItem.price/100 * cartItem.quantity} </div>
-                  
-                    `
+                <div class ="panier" >
+                   <h5 class="name-product">${cartItem.name} </h5>  
+                    <h5 class="price-product"> ${cartItem.price/100},00 €  </h5>
+                    <h5 class="quantity-product"><i id="accre" class="far fa-plus-square"></i> ${cartItem.quantity} 
+                     <i id="dec" class="fas fa-minus-circle"></i></h5>  
+                    <h5 class ="total-product" >${cartItem.price/100 * cartItem.quantity},00 € </h5>
+                    <button id ="remove" >retirer</button>
+                </div>   
+                `
+                    );
 
-    );
+                    let cartCost = localStorage.getItem("totalCost");
+
+       productsPanier.innerHTML += `
+         <div class = "totalContainer" >
+          <div class = "totalTitle">total des produits</div>
+          <h4 class = "totalProduct">
+          ${cartCost},00 € </h4>
+         </div>
+
+       `
+     
+
   }
  }
- displayCart();
- 
- 
+
+
+ let removeBtn = document.querySelectorAll('#remove');
+ console.log(removeBtn)
  /*
     let cartItems = localStorage.getItem("productInCart") || [];
     cartItems = JSON.parse(cartItems);
@@ -89,4 +104,4 @@ if(productNumbers){
  
 onloadCartNumbers();
   
-//displayCart();
+displayCart();

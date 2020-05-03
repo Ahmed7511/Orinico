@@ -75,25 +75,7 @@ $(function(){
                  }else{
                       let itemHasChanged = false; // Cette déclaration servira pour contrôler les doublons
                             
-                     for(let i = 0; i < cartItems.length; i++) {   // en fonction de la quantité de produits dans le localStorage
-            
-                     // S'il y a déjà un item avec un nom ET un id identique
-                      if((cartItems[i].name == cart.name) && cartItems[i]._id == cart._id) { 
-                  
-                      cartItemsQuantityNumber = Number(cartItems[i].quantity); 
-                      //  On récupère la quantité du produit en cours d'ajout
-          
-                     let cartQuantityNumber = Number(cart.quantity);   
-         
-                     // Ainsi que la quantité de produits identiques déjà présents dans le localStorage
-    
-                    let sumQuantity = cartItemsQuantityNumber + cartQuantityNumber;
-                     [i].quantity = sumQuantity.toString();
-                    // Et on remplace la quantité du localStorage par cette nouvelle quantité
-                     itemHasChanged = true;  
-                          }
-
-                       }
+                   
                        if(itemHasChanged == false) {  
                        // Il y a déjà des produits dans le panier mais pas identiques à ceux qui sont en ajout
                        cartItems.push(cart);       
@@ -104,10 +86,21 @@ $(function(){
                      localStorage.setItem("productInCart", JSON.stringify(cartItems));   
                      // Puis stringify le contenu de cartItems pour l'ajouter au localStorage                      
                         } 
-        
+                        let cartCost = localStorage.getItem("totalCost");
+                        //console.log(typeof cartCost)
+                        if(cartCost != null){
+                          cartCost = parseInt(cartCost);
+                          //console.log(typeof (quantity)) 
+                         quantity = parseInt(quantity)
+                        // console.log(typeof (quantity))
+                          localStorage.setItem("totalCost", cartCost + product.price/100 * quantity )
+                        }else{
+                        localStorage.setItem("totalCost", product.price/100 * quantity)
+                        }
                   }      
 
             }
+
 
 
     
