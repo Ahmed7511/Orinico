@@ -31,7 +31,6 @@
       </div>
     
        <div class="products-panier">
-
        </div>
             
     </div>
@@ -42,13 +41,13 @@
         <form id ="formulaire">
         <p>
           <label>NOM</label><br>
-         <input type="text" name="nom" placeholder="Nom" required><br>
+         <input type="text" name="nom" placeholder="Nom" id="UserName" pattern="[A-Za-z]" required><br>
         <label>PRENOM</label><br>
-         <input type="text" name="prenom" placeholder="Prenom" required><br>
+         <input type="text" name="prenom" placeholder="Prenom" pattern="[A-Za-z]" required><br>
           <label>EMAIL</label><br>
-           <input type="email" name="email" required><br>
+           <input type="email" name="email" required id="mail" pattern="[A-Za-z@0-9]"><br>
            <label>TELEPHONE(optionnel)</label><br>
-            <input type="number" name="telephone" ><br>
+            <input type="text" name="idPhoneNumber" pattern="[0-9]{10}" required><br>
          <br> l'adresse du livraison<br>
              <label>RUE</label><br>
               <input type="text" name=" rue" required><br>

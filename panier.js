@@ -6,7 +6,7 @@
 
   if(cartItems && productsPanier){
     productsPanier.innerHTML ='' ;
-    Object.values(cartItems).map(cartItem =>
+    Object.values(cartItems).forEach(cartItem =>
     productsPanier.innerHTML += `
                 <div class ="panier" >
                    <h5 class="name-product">${cartItem.name} </h5>  
@@ -14,7 +14,7 @@
                     <h5 class="quantity-product"><i id="accre" class="far fa-plus-square"></i> ${cartItem.quantity} 
                      <i id="dec" class="fas fa-minus-circle"></i></h5>  
                     <h5 class ="total-product" >${cartItem.price/100 * cartItem.quantity},00 € </h5>
-                    <button id ="remove" >retirer</button>
+                    <button class="remove" id="${cartItem.id}" >retirer</button>
                 </div>   
                 `
                     );
@@ -35,8 +35,7 @@
  }
 
 
- let removeBtn = document.querySelectorAll('#remove');
- console.log(removeBtn)
+ 
  /*
     let cartItems = localStorage.getItem("productInCart") || [];
     cartItems = JSON.parse(cartItems);
@@ -105,3 +104,21 @@ if(productNumbers){
 onloadCartNumbers();
   
 displayCart();
+
+var removeBtn = document.getElementsByClassName('remove');
+var panier = document.getElementsByClassName('panier');
+console.log(panier)
+
+panier.onclick = function(e){
+  console.log('clickkkk')
+}
+for( var i=0; i<removeBtn.length; i++){
+var button = removeBtn[i]
+button.addEventListener('click', function(event){
+console.log(event.target)
+  var buttonClicked = event.target
+  console.log(buttonClicked.prentElement)
+  buttonClicked.prentElement.remove()
+ 
+});
+}
