@@ -20,7 +20,7 @@ $(function(){
                    '<option > ' + product.lenses[1] +' </option>' + 
                    '<option > ' + product.lenses[2] + ' </option>' + 
             '</select>' + 
-            '<li><strong>Quantité : </strong> <input id="quantity" type ="number" </input></li>' +
+            '<li><strong>Quantité : </strong> <input id="quantity" type ="number"> </input></li>' +
 
           '</ul>' +
     
@@ -133,7 +133,10 @@ $(function(){
 
 
 
-
+function change(){
+  var select = document.getElementById('ddselect');
+var display = select.option[select.selectedIndex].value;
+}
 
 
 

@@ -1,7 +1,8 @@
- 
- function displayCart(){
+
   let cartItems = localStorage.getItem("productInCart") || [];
   cartItems = JSON.parse(cartItems);
+ 
+ function displayCart(){
   let productsPanier = document.querySelector('.products-panier');
 
   if(cartItems && productsPanier){
@@ -68,3 +69,43 @@ button.addEventListener('click', function(event){
   buttonClicked.parentElement.remove()
 });
 }
+let submit = document.getElementById('submit');
+submit.addEventListener('click' ,()=>{
+  productsOrder();
+
+} )
+
+function productsOrder(){
+  let firstName = document.getElementById('firstName').value;
+  let lastName = document.getElementById('lastName').value;
+  let address = document.getElementById('address').value;
+  let city = document.getElementById('city').value;
+  let email = document.getElementById('mail').value;
+  var contact = { firstName, lastName, address, city, email }; // on mis tt les inputs dans un objet 
+  let products = []
+  cartItems.forEach(cartItem =>{
+    products.push(cartItem.id)
+  })
+
+    console.log(products)
+    console.log(contact)
+     
+    fetch('http://localhost:3000/api/cameras/order',
+    {method: 'post',
+    headers: {"content-type":"application/x-www-form-urlencoded; charset=UTF-8"},
+    body: {products,contact}
+    })
+      .then(response => response.json())
+      .then(console.log)
+
+
+
+
+
+
+    
+
+
+
+    
+    }
