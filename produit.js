@@ -135,7 +135,7 @@ $(function(){
 
 function change(){
   var select = document.getElementById('ddselect');
-var display = select.option[select.selectedIndex].value;
+ select.option[select.selectedIndex].value;
 }
 
 

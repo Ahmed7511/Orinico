@@ -34,11 +34,10 @@
   }
  }
 
-    
-   function onloadCartNumbers(){
-  let productNumbers = localStorage.getItem('totalCart');
-if(productNumbers){
-  document.querySelector('.cart span').textContent = productNumbers ; 
+ function onloadCartNumbers(){
+  let cartItemsQuantityNumber = localStorage.getItem('totalCart');
+if(cartItemsQuantityNumber){
+  document.querySelector('.cart span').textContent = cartItemsQuantityNumber ; 
 }
 
 }
@@ -86,18 +85,30 @@ function productsOrder(){
   cartItems.forEach(cartItem =>{
     products.push(cartItem.id)
   })
-     //console.log(contact)
-     //console.log(products)
+
     fetch('http://localhost:3000/api/cameras/order',
     {method: 'post',
-    headers: {"content-type":"application/x-www-form-urlencoded; charset=UTF-8"},
-    body: {products,contact}
+    headers: {'content-type':'application/json'}, // pour que  fetch comprendre qu'on va envoyer du json 
+    body: JSON.stringify({products,contact})      // envoyer le body en json 
     })
-      .then(response => response.json())
-      .then((response) =>{
-      })  
+      .then(response => { return response.json()})
+      .then(data => {
+        //console.log(data.orderId)
+        //console.log(cartCost)
+        let getOrderId = data.orderId ;
+        let getCartCost = cartCost ;
+        let orderRecap = {getOrderId, getCartCost}
+        //console.log(orderRecap)
+        localStorage.clear();
+        localStorage.setItem('orderRecap', JSON.stringify(orderRecap)) // on créé un localStorage qui contient le recap 
 
-           window.location = 'confirmation.html';
+
+        window.location = 'confirmation.html';
+      })
+      
+
+          .catch( Error => console.error('erreur'))
+
 
     }
     

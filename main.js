@@ -14,9 +14,8 @@ var $products = $('#products');
       '<li><strong>Name :</strong>' +product.name +' </li>' +
       '<li id="price"><strong>price:</strong>' +product.price/100+'€' +' </li>' +
        '<li><strong>Description :</strong>' +product.description +' </li>' +
-      '</ul>' +
       '<button><a id ="btn'+[i] +'" href="produit.html?id=' + product._id +'">personnalisez votre produit </a></button>' +
-
+      '</ul>' +
        '</div>'
      );
     });
