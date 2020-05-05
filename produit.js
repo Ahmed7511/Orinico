@@ -29,8 +29,11 @@ $(function(){
         
 
 
+        
+
     
-    let carts = document.querySelectorAll('div > a');  
+    let carts = document.querySelectorAll('.add-card'); 
+    console.log(carts) 
    for(let i=0; i< carts.length; i++){
     carts[i].addEventListener('click', () =>{
       setItems(product);
@@ -59,10 +62,12 @@ $(function(){
         localStorage.setItem('totalCart', 1);
         document.querySelector('.cart span').textContent = 1;
       }
+      let lenses = document.querySelector('select').value;
            let cart = {
                  "id" : product._id ,                     
                  "name" : product.name ,
-                "price" : product.price ,                // Déclaration d'un objet cart qui représentent un type de produit 
+                "price" : product.price ,  
+                "lenses": lenses,              // Déclaration d'un objet cart qui représentent un type de produit 
                 "description" : product.description ,
                   "quantity" : quantity,
                 "imageURL" : product.imageUrl
@@ -119,16 +124,14 @@ $(function(){
 
 
 
+          }  
+
+        }) ; 
+                                                     
+        });
 
 
 
-
-
-    }  
-
-}) ; 
-                                             
-});
 
 
 

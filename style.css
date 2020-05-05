@@ -12,8 +12,11 @@ nav li{
      font-size: 2rem;
      color: #fff;
 }
-
-#add-cart ,h1, h2, h3 , p{
+ #add-card{
+    display: block;
+   margin: auto;
+}
+ h1, h2, h3 , p{
     text-align: center;
    color: #fff;
 }
@@ -42,7 +45,6 @@ a{
     height: 30px;
   margin: 20px;
 }
-
  .socials{
     display: flex;
     justify-content: center;
