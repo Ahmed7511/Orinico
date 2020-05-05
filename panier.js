@@ -1,7 +1,7 @@
-
-  let cartItems = localStorage.getItem("productInCart") || [];
+ let cartItems = localStorage.getItem("productInCart") || [];
   cartItems = JSON.parse(cartItems);
- 
+  let cartCost = localStorage.getItem("totalCost");
+
  function displayCart(){
   let productsPanier = document.querySelector('.products-panier');
 
@@ -20,7 +20,6 @@
                 `
                     );
 
-                    let cartCost = localStorage.getItem("totalCost");
 
        productsPanier.innerHTML += `
          <div class = "totalContainer" >
@@ -48,7 +47,6 @@ onloadCartNumbers();
   
 displayCart();
 
-
 accre = document.getElementById('accre');
 dec = document.getElementById('dec');
 console.log(accre)
@@ -70,12 +68,14 @@ button.addEventListener('click', function(event){
 });
 }
 let submit = document.getElementById('submit');
-submit.addEventListener('click' ,()=>{
-  productsOrder();
+submit.addEventListener('click' ,(e)=>{
+e.preventDefault();
+productsOrder();
 
 } )
 
 function productsOrder(){
+  
   let firstName = document.getElementById('firstName').value;
   let lastName = document.getElementById('lastName').value;
   let address = document.getElementById('address').value;
@@ -86,26 +86,19 @@ function productsOrder(){
   cartItems.forEach(cartItem =>{
     products.push(cartItem.id)
   })
-
-    console.log(products)
-    console.log(contact)
-     
+     //console.log(contact)
+     //console.log(products)
     fetch('http://localhost:3000/api/cameras/order',
     {method: 'post',
     headers: {"content-type":"application/x-www-form-urlencoded; charset=UTF-8"},
     body: {products,contact}
     })
       .then(response => response.json())
-      .then(console.log)
+      .then((response) =>{
+      })  
 
+           window.location = 'confirmation.html';
 
-
-
-
-
-    
-
-
-
-    
     }
+    
+
