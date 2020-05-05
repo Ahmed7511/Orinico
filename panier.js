@@ -1,12 +1,13 @@
- 
- function displayCart(){
-  let cartItems = localStorage.getItem("productInCart") || [];
+ let cartItems = localStorage.getItem("productInCart") || [];
   cartItems = JSON.parse(cartItems);
+  let cartCost = localStorage.getItem("totalCost");
+
+ function displayCart(){
   let productsPanier = document.querySelector('.products-panier');
 
   if(cartItems && productsPanier){
     productsPanier.innerHTML ='' ;
-    Object.values(cartItems).map(cartItem =>
+    Object.values(cartItems).forEach(cartItem =>
     productsPanier.innerHTML += `
                 <div class ="panier" >
                    <h5 class="name-product">${cartItem.name} </h5>  
@@ -14,12 +15,11 @@
                     <h5 class="quantity-product"><i id="accre" class="far fa-plus-square"></i> ${cartItem.quantity} 
                      <i id="dec" class="fas fa-minus-circle"></i></h5>  
                     <h5 class ="total-product" >${cartItem.price/100 * cartItem.quantity},00 € </h5>
-                    <button id ="remove" >retirer</button>
+                    <button class="remove" id="${cartItem.id}" ><i class="far fa-trash-alt"></i></button>
                 </div>   
                 `
                     );
 
-                    let cartCost = localStorage.getItem("totalCost");
 
        productsPanier.innerHTML += `
          <div class = "totalContainer" >
@@ -34,70 +34,10 @@
   }
  }
 
-
- let removeBtn = document.querySelectorAll('#remove');
- console.log(removeBtn)
- /*
-    let cartItems = localStorage.getItem("productInCart") || [];
-    cartItems = JSON.parse(cartItems);
-    let product = document.querySelector('.products-panier');
-    cartItems.forEach(function(cartItem)  {
-   //console.log(cartItem.name)
-    /* let ul = document.createElement('ul');
-     ul.classList.add('list-groupe-item');
-     document.querySelector('.products-panier').appendChild(ul); 
-   ul.textContent =cartItem.name
-                   + cartItem.price/100            
-                    + cartItem.quantity
-                    + cartItem.price/100 * cartItem.quantity
-                  
-                     
-   if(cartItems[i] && product){
-        var output=""
-      output += '<div class="name-product">' + cartItem.name + '</div>'  +
-                    '<div class="price-product">' + cartItem.price/100+'€' +' </div>' +
-                    '<div class="quantity-product"><i class="far fa-plus-square"></i> '+ cartItem.quantity +' <i class="fas fa-minus-circle"></i></div>' + 
-                    '<div class ="total-product" >'+ cartItem.price/100 * cartItem.quantity +'</div>'
-                        
-
-                 
-     
-             document.querySelector('.products-panier').innerHTML = output ;
-
-            });
-
-/*function displayCart(){
-    cartItems = localStorage.getItem("productInCart");
-    cartItems = JSON.parse(cartItems);
-
-    let product = document.querySelector('.products');
-
-if(cartItems && product){
-   var output=""
- output += '<div class="product">'+
-           '<img src="' + cartItems.imageUrl+'" width= 70px >' +
-           
-            '<strong>Name :</strong>'  + cartItems.name +
-              
-
-               '</div>'  +
-               '<div class="price">' +cartItems.price/100+'€' +' </div>' +
-               '<div class="quantity"><i class="far fa-plus-square"></i> 1  <i class="fas fa-minus-circle"></i></div>' 
- 
-        
-   
-           
-            }
-
-        document.querySelector('.products').innerHTML = output ;
-
-}*/
-
-    
-   function onloadCartNumbers(){
-  let productNumbers = localStorage.getItem('totalCart');
-if(productNumbers){
-  document.querySelector('.cart span').textContent = productNumbers ; 
+ function onloadCartNumbers(){
+  let cartItemsQuantityNumber = localStorage.getItem('totalCart');
+if(cartItemsQuantityNumber){
+  document.querySelector('.cart span').textContent = cartItemsQuantityNumber ; 
 }
 
 }
@@ -105,3 +45,71 @@ if(productNumbers){
 onloadCartNumbers();
   
 displayCart();
+
+accre = document.getElementById('accre');
+dec = document.getElementById('dec');
+console.log(accre)
+
+for( var i=0; i< accre.length; i++){
+var accrBtn = accre[i]
+accrBtn.addEventListener('click', ()=>{
+  console.log('click')
+})
+
+}
+removeBtn = document.getElementsByClassName('remove');
+for( var i=0; i<removeBtn.length; i++){
+var button = removeBtn[i]
+button.addEventListener('click', function(event){
+//console.log(event.target)
+  var buttonClicked = event.target
+  buttonClicked.parentElement.remove()
+});
+}
+let submit = document.getElementById('submit');
+submit.addEventListener('click' ,(e)=>{
+e.preventDefault();
+productsOrder();
+
+} )
+
+function productsOrder(){
+  
+  let firstName = document.getElementById('firstName').value;
+  let lastName = document.getElementById('lastName').value;
+  let address = document.getElementById('address').value;
+  let city = document.getElementById('city').value;
+  let email = document.getElementById('mail').value;
+  var contact = { firstName, lastName, address, city, email }; // on mis tt les inputs dans un objet 
+  let products = []
+  cartItems.forEach(cartItem =>{
+    products.push(cartItem.id)
+  })
+
+    fetch('http://localhost:3000/api/cameras/order',
+    {method: 'post',
+    headers: {'content-type':'application/json'}, // pour que  fetch comprendre qu'on va envoyer du json 
+    body: JSON.stringify({products,contact})      // envoyer le body en json 
+    })
+      .then(response => { return response.json()})
+      .then(data => {
+        //console.log(data.orderId)
+        //console.log(cartCost)
+        let getOrderId = data.orderId ;
+        let getCartCost = cartCost ;
+        let orderRecap = {getOrderId, getCartCost}
+        //console.log(orderRecap)
+        localStorage.clear();
+        localStorage.setItem('orderRecap', JSON.stringify(orderRecap)) // on créé un localStorage qui contient le recap 
+
+
+        window.location = 'confirmation.html';
+      })
+      
+
+          .catch( Error => console.error('erreur'))
+
+
+    }
+    
+

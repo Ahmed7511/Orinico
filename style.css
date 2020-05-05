@@ -12,8 +12,11 @@ nav li{
      font-size: 2rem;
      color: #fff;
 }
-
-#add-cart ,h1, h2, h3 , p{
+ #add-card{
+    display: block;
+   margin: auto;
+}
+ h1, h2, h3 , p{
     text-align: center;
    color: #fff;
 }
@@ -30,9 +33,13 @@ nav li{
 .product ul{
     list-style-type: none;
 }
+li{
+    margin: 10px;
+}
 a{
-    color: #fff;
-    background-color: lightcoral;
+    text-decoration: none;
+    color: rgb(12, 5, 5);
+   /* background-color: lightcoral; */
     max-width: 200px;
     width: 100%;
     height: 30px;
@@ -117,4 +124,11 @@ align-items: center;
 
 #formulaire{
     text-align: center;
+}
+
+/*---------------------------page confirmation------------------------------------------------*/
+
+h6 , p {
+    text-align: center;
+    font-size: large;
 }
