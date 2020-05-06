@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://kit.fontawesome.com/c10c83c5b7.js" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" ></script>
 
     <link rel="stylesheet"  href="style.css" >
     <title>Orinico-panier</title>
@@ -40,7 +40,7 @@
 
     
   
-        <form id ="formulaire">
+        <form method="post" id ="formulaire">
         <p>
           <label>NOM</label><br>
          <input type="text" name="nom" placeholder="Nom" id="firstName" pattern="[a-z-'éèA-Z]+" required><br>
@@ -49,7 +49,7 @@
           <label>EMAIL</label><br>
            <input type="email" name="email" id="mail" required><br>
            <label>TELEPHONE(optionnel)</label><br>
-            <input type="text" name="PhoneNumber"   pattern="[0-9]{10}" required><br>
+            <input type="text" name="PhoneNumber"  pattern="[0-9]{10}" required><br>
          <br> l'adresse du livraison<br>
              <label>RUE</label><br>
               <input type="text" name=" rue" id="address" pattern="[0-9 'éèa-zA-Z]+" required><br>
@@ -58,10 +58,9 @@
             <label>PAYS</label><br>
              <input type="text" name="pays" required><br><br>
          </p>
-          <input type="submit" value="envoyer" id="submit">
+          <input type="submit" value="envoyer" id="submit" >
 
         </form>
-
         <aside>
           <h3>Toute l'équipe d'Orinoco vous remercie de votre visite.</h3>
       </aside>
@@ -84,7 +83,7 @@
 
 
 
-<script src="panier.js">
+<script async src="panier.js">
  
    
 </script>

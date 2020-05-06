@@ -77,7 +77,7 @@ $(function(){
                   if (localStorage.getItem('productInCart') === null) {   /* Si le localStorage est vide */
          
                  cartItems.push(cart)   // On va ajouter le produit actuel à l'array cartItems
-                  localStorage.setItem("productInCart", JSON.stringify(cart)) || []; 
+                  localStorage.setItem("productInCart", JSON.stringify(cartItems)) || []; 
                  }else{
                       let itemHasChanged = false; // Cette déclaration servira pour contrôler les doublons
                             
