@@ -1,5 +1,5 @@
  let cartItems = localStorage.getItem("productInCart") || [];
-  cartItems = JSON.parse(cartItems);
+   cartItems = JSON.parse(cartItems);
   let cartCost = localStorage.getItem("totalCost");
 
  function displayCart(){
@@ -15,8 +15,8 @@
                     <h5 class="quantity-product"><i id="accre" class="far fa-plus-square"></i> ${cartItem.quantity} 
                      <i id="dec" class="fas fa-minus-circle"></i></h5>  
                     <h5 class ="total-product" >${cartItem.price/100 * cartItem.quantity},00 € </h5>
-                    <button class="remove" id="${cartItem.id}" ><i class="far fa-trash-alt"></i></button>
                 </div>   
+
                 `
                     );
 
@@ -26,6 +26,8 @@
           <div class = "totalTitle">total des produits</div>
           <h4 class = "totalProduct">
           ${cartCost},00 € </h4>
+          <button class="remove" ><i class="far fa-trash-alt"></i></button>
+
          </div>
 
        `
@@ -59,19 +61,34 @@ accrBtn.addEventListener('click', ()=>{
 }
 removeBtn = document.getElementsByClassName('remove');
 for( var i=0; i<removeBtn.length; i++){
-var button = removeBtn[i]
+  var button = removeBtn[i]
 button.addEventListener('click', function(event){
-//console.log(event.target)
+  alert('vous pouvez retourner vers la page d\'acceuil et choisir le produit que vous plaira !! ')
   var buttonClicked = event.target
-  buttonClicked.parentElement.remove()
+  buttonClicked.parentElement.parentElement.remove()
+  localStorage.clear();
+  window.location.reload()
 });
 }
-let submit = document.getElementById('submit');
-submit.addEventListener('click' ,(e)=>{
-e.preventDefault();
-productsOrder();
 
-} )
+/*let submit = document.getElementById('submit');
+submit.addEventListener('click' ,(e)=>{
+
+} ) */
+
+document.getElementById('formulaire').addEventListener('submit', function(e){
+  var inputs = document.getElementsByTagName('input');       // on recupére tous les inputs 
+  for(var i=0; i< inputs.length; i++){
+    if(!inputs[i].value){                               //  if inputs.value = '' ; 
+      error = "veuillez renseigner tous les champs !"
+    }else if (inputs[i].value){
+      (e).preventDefault();                   // stopper le comporetement normale
+      productsOrder();
+    }
+
+  }
+})
+
 
 function productsOrder(){
   
@@ -95,15 +112,20 @@ function productsOrder(){
       .then(data => {
         //console.log(data.orderId)
         //console.log(cartCost)
-        let getOrderId = data.orderId ;
+       
+      let getOrderId = data.orderId ;
         let getCartCost = cartCost ;
         let orderRecap = {getOrderId, getCartCost}
-        //console.log(orderRecap)
+        
+        
         localStorage.clear();
         localStorage.setItem('orderRecap', JSON.stringify(orderRecap)) // on créé un localStorage qui contient le recap 
+      
+    
+           
+       window.location = 'confirmation.html' ; 
 
-
-        window.location = 'confirmation.html';
+           
       })
       
 
