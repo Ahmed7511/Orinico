@@ -48,17 +48,7 @@ onloadCartNumbers();
   
 displayCart();
 
-accre = document.getElementById('accre');
-dec = document.getElementById('dec');
-console.log(accre)
 
-for( var i=0; i< accre.length; i++){
-var accrBtn = accre[i]
-accrBtn.addEventListener('click', ()=>{
-  console.log('click')
-})
-
-}
 removeBtn = document.getElementsByClassName('remove');
 for( var i=0; i<removeBtn.length; i++){
   var button = removeBtn[i]
@@ -71,10 +61,6 @@ button.addEventListener('click', function(event){
 });
 }
 
-/*let submit = document.getElementById('submit');
-submit.addEventListener('click' ,(e)=>{
-
-} ) */
 
 document.getElementById('formulaire').addEventListener('submit', function(e){
   var inputs = document.getElementsByTagName('input');       // on recupére tous les inputs 
@@ -110,6 +96,7 @@ function productsOrder(){
     })
       .then(response => { return response.json()})
       .then(data => {
+        //console.log(data)
         //console.log(data.orderId)
         //console.log(cartCost)
        

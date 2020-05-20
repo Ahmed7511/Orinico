@@ -19,19 +19,16 @@ var $products = $('#products');
        '</div>'
      );
     });
-   /* let allProducts = JSON.parse(localStorage.getItem('AllProducts'));
-
-   
-       localStorage.setItem('AllProducts', JSON.stringify(products)); */
     }  
 }) ;                                                  
 });
-
 function onloadCartNumbers(){
-  let productNumbers = localStorage.getItem('totalCart');
-if(productNumbers){
-  document.querySelector('.cart span').textContent = productNumbers ; 
+  let cartItemsQuantityNumber = localStorage.getItem('totalCart');
+if(cartItemsQuantityNumber){
+  document.querySelector('.cart span').textContent = cartItemsQuantityNumber ; 
 }
+
 }
+ 
 onloadCartNumbers();
 
