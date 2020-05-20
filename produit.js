@@ -13,12 +13,10 @@ $(function(){
           '<li id="price"><strong>price:</strong>' +product.price/100+'€' +' </li>' +
            '<li><strong>Description :</strong>' +product.description +' </li>' +
            '<li><strong>Lentille :</strong>' +
+           
                
            '<select id ="ddselect" onchange="change();" >' +
            
-                   '<option > ' + product.lenses[0] +' </option>' +
-                   '<option > ' + product.lenses[1] +' </option>' + 
-                   '<option > ' + product.lenses[2] + ' </option>' + 
             '</select>' + 
             '<li><strong>Quantité : </strong> <input id="quantity" type ="number"> </input></li>' +
 
@@ -28,9 +26,13 @@ $(function(){
          );
         
 
-
+//console.log(product.lenses)
+         var dselect = document.getElementById('ddselect');    // on crééé une variable pour mettre nos options via innerHTML
+    for(i=0; i < product.lenses.length; i++){
+      dselect.innerHTML += '<option>'+ product.lenses[i] +'</option>' ; 
+    }
+ 
         
-
     
     let carts = document.querySelectorAll('.add-card'); 
     console.log(carts) 
@@ -43,7 +45,7 @@ $(function(){
       function setItems(product){
         let quantity = document.getElementById('quantity').value;
             if(quantity < 1){
-                alert('veuillez choisir une quantité s\'il vous plait !!') 
+                alert('veuillez sélectionnez une quantité s\'il vous plait !!') 
                 event.preventDefault();
            }else{
             totalCart(product); 
@@ -129,8 +131,6 @@ $(function(){
         }) ; 
                                                      
         });
-
-
 
 
 
