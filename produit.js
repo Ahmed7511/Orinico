@@ -1,8 +1,10 @@
-const lien = window.location.search.substring(4)
+
+const params = window.location.search.substring(4)
+
 $(function(){
     var $product = $('#product'); 
       $.ajax({
-        url: 'http://localhost:3000/api/cameras/' + lien,
+        url: 'http://localhost:3000/api/cameras/' + params,
         type: 'GET',
         success: function(product){
           $product.append('<div class="product">'+
@@ -27,7 +29,7 @@ $(function(){
         
 
 //console.log(product.lenses)
-         var dselect = document.getElementById('ddselect');    // on crééé une variable pour mettre nos options via innerHTML
+         var dselect = document.getElementById('ddselect');    // on créé une variable pour mettre nos options via innerHTML
     for(i=0; i < product.lenses.length; i++){
       dselect.innerHTML += '<option>'+ product.lenses[i] +'</option>' ; 
     }
@@ -35,7 +37,7 @@ $(function(){
         
     
     let carts = document.querySelectorAll('.add-card'); 
-    console.log(carts) 
+    //console.log(carts) 
    for(let i=0; i< carts.length; i++){
     carts[i].addEventListener('click', () =>{
       setItems(product);
@@ -43,7 +45,7 @@ $(function(){
       })
     }
       function setItems(product){
-        let quantity = document.getElementById('quantity').value;
+        let quantity = document.getElementById('quantity').value; // input
             if(quantity < 1){
                 alert('veuillez sélectionnez une quantité s\'il vous plait !!') 
                 event.preventDefault();
@@ -54,7 +56,7 @@ $(function(){
 
         let cartItemsQuantityNumber = localStorage.getItem('totalCart');
         //console.log(typeof cartItemsQuantityNumber)
-        cartItemsQuantityNumber = parseInt(cartItemsQuantityNumber);            // converti le productNumbers en numéro 
+        cartItemsQuantityNumber = parseInt(cartItemsQuantityNumber); // converti le productNumbers en numéro 
       if(cartItemsQuantityNumber){
       
       localStorage.setItem('totalCart',cartItemsQuantityNumber + 1);
@@ -77,18 +79,12 @@ $(function(){
   
                   let cartItems =  JSON.parse(localStorage.getItem('productInCart')) || [];
                   if (localStorage.getItem('productInCart') === null) {   /* Si le localStorage est vide */
-         
+                    localStorage.setItem("productInCart", JSON.stringify(cartItems)) || [];  //on crée notre Array
+
                  cartItems.push(cart)   // On va ajouter le produit actuel à l'array cartItems
-                  localStorage.setItem("productInCart", JSON.stringify(cartItems)) || []; 
-                 }else{
-                      let itemHasChanged = false; // Cette déclaration servira pour contrôler les doublons
-                            
-                   
-                       if(itemHasChanged == false) {  
-                       // Il y a déjà des produits dans le panier mais pas identiques à ceux qui sont en ajout
-                       cartItems.push(cart);       
+                 }else{ 
+                      cartItems.push(cart);       
                        // Donc on peut simplement push les nouveaux produits pour les ajouter à l'array cartItems
-                           }
                          }   
             
                      localStorage.setItem("productInCart", JSON.stringify(cartItems));   
@@ -108,9 +104,6 @@ $(function(){
                   }      
 
             }
-
-
-
     
             function onloadCartNumbers(){
               let cartItemsQuantityNumber = localStorage.getItem('totalCart');
@@ -121,19 +114,12 @@ $(function(){
             }
              
             onloadCartNumbers();
-              
-  
-
-
 
           }  
 
         }) ; 
                                                      
         });
-
-
-
 
 
 function change(){

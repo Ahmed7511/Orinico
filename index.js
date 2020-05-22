@@ -6,7 +6,7 @@ var $products = $('#products');
     type: 'GET',
     typeData: 'json',
     success: function(products){
-    $.each(products, function(i , product){
+    $.each(products, function(i , product){            // i = index , product = item
       $products.append('<div class="product">'+
       '<img src="' + product.imageUrl+'">' +
       '<div>' +
