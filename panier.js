@@ -2,7 +2,7 @@
    cartItems = JSON.parse(cartItems);
   let cartCost = localStorage.getItem("totalCost");
 
- function displayCart(){
+  function displayCart(){
   let productsPanier = document.querySelector('.products-panier');
 
   if(cartItems && productsPanier){
