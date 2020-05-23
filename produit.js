@@ -36,15 +36,14 @@ $(function(){
  
         
     
-    let carts = document.querySelectorAll('.add-card'); 
-    //console.log(carts) 
-   for(let i=0; i< carts.length; i++){
-    carts[i].addEventListener('click', () =>{
+    let cart = document.querySelector('.add-card'); 
+    //console.log(cart) 
+    cart.addEventListener('click', () =>{
       setItems(product);
       // on click on lance la function
       })
-    }
-      function setItems(product){
+    
+    function setItems(product){
         let quantity = document.getElementById('quantity').value; // input
             if(quantity < 1){
                 alert('veuillez sélectionnez une quantité s\'il vous plait !!') 
@@ -52,7 +51,7 @@ $(function(){
            }else{
             totalCart(product); 
 
-      function totalCart(product){
+     function totalCart(product){
 
         let cartItemsQuantityNumber = localStorage.getItem('totalCart');
         //console.log(typeof cartItemsQuantityNumber)
@@ -105,7 +104,7 @@ $(function(){
 
             }
     
-            function onloadCartNumbers(){
+               function onloadCartNumbers(){
               let cartItemsQuantityNumber = localStorage.getItem('totalCart');
             if(cartItemsQuantityNumber){
               document.querySelector('.cart span').textContent = cartItemsQuantityNumber ; 

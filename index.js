@@ -1,3 +1,4 @@
+
 //------------------page index--------------// 
 $(function(){
 var $products = $('#products'); 
@@ -19,8 +20,11 @@ var $products = $('#products');
        '</div>'
      );
     });
-    }  
-}) ;                                                  
+    },  
+     error: function(){
+       console.log('bad request');
+     }
+  }) ;                                                  
 });
 function onloadCartNumbers(){
   let cartItemsQuantityNumber = localStorage.getItem('totalCart');
