@@ -100,7 +100,7 @@ function productsOrder(){
         //console.log(data.orderId)
         //console.log(cartCost)
        
-      let getOrderId = data.orderId ;
+        let getOrderId = data.orderId ;
         let getCartCost = cartCost ;
         let orderRecap = {getOrderId, getCartCost}
         
