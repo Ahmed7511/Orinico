@@ -12,7 +12,7 @@ const getProducts = async function () {          // création de la fonction asy
                                                           <li id="price"><strong>Name:</strong>${product.name} </li>
                                                           <li id="price"><strong>Prix:</strong> ${product.price / 100}</li>
                                                           <li><strong>Description :</strong>${product.description}</li>
-                                                          '<button><a id ="btn" href="produit.html?id=${product._id }">personnalisez votre produit </a></button>
+                                                          '<button id ="btn" onclick='location.href="produit.html?id=${product._id }"'>personnalisez votre produit </button>
                                                       </ul>
                                                   </div>    
                                              </div>`;
