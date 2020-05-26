@@ -18,7 +18,8 @@ const getProducts = async function () {          // création de la fonction asy
                                              </div>`;
                                              
                                               });
-                                          });
+                                          })
+                                          .catch(error => console.error('error'))
                             };
       
           getProducts();

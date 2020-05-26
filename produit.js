@@ -121,7 +121,9 @@ const getProduct = async function () {        // création de la fonction asynch
                                         );
                               }
                     });
-          });
+                    
+          })
+          .catch(error => console.error('error'))
 };
 window.onload = () => {
           //on charge la fonction au lancement de la page
