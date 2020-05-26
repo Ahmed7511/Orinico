@@ -1,59 +1,70 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet"  href="style.css" >
-    <script src="https://kit.fontawesome.com/c10c83c5b7.js" crossorigin="anonymous"></script>
+          <head>
+                    <meta charset="UTF-8" />
+                    <meta
+                              name="viewport"
+                              content="width=device-width, initial-scale=1.0"
+                    />
+                    <link rel="stylesheet" href="style.css" />
+                    <script
+                              src="https://kit.fontawesome.com/c10c83c5b7.js"
+                              crossorigin="anonymous"
+                    ></script>
 
-    <title>product-orinico</title>
-</head>
-<body>
+                    <title>product-orinico</title>
+          </head>
+          <body>
+                    <header>
+                              <nav>
+                                        <ul>
+                                                  <li>
+                                                            <a href="index.html">Orinico</a>
+                                                  </li>
+                                                  <li class="cart">
+                                                            <a  href="panier.html" >
+                                                                      <i class="fas fa-shopping-cart" >
+                                                                        </i >panier<span >0</span>
+                                                            </a>
+                                                  </li>
+                                        </ul>
+                              </nav>
+                    </header>
+                    <main>
+                              <h1>Personnaliser votre produit</h1>
+                              <div id="product"></div>
 
-  <header>
-    <nav>
-      <ul> 
-       <li><a href="index.html">Orinico</a></li>
-       <li class="cart">
-        <a href="panier.html">
-         <i class="fas fa-shopping-cart"></i>panier<span>0</span>
-            </a>
-       </li>
-     </ul>
-    </nav>
-  </header>
-<main>
-  
+                              <button
+                                        id="add-card"
+                                        class="add-card"
+                                        onchange="change()"
+                                        onclick='location.href="panier.html"'
+                              >
+                                        Ajouter au panier
+                              </button>
+                    </main>
+                    <footer class="socials">
+                              <a class="social" href="index.html"
+                                        ><span class="fa fa-twitter"></span
+                                        ><br />twitter</a
+                              >
 
-  <h1>Personnaliser votre produit  </h1>
-<div id="product" >
-  
+                              <a class="social" href="index.html"
+                                        ><span class="fa fa-facebook"></span
+                                        ><br />facebook</a
+                              >
 
-</div>
+                              <a class="social" href="index.html"
+                                        ><span class="fa fa-dribbble"></span
+                                        ><br />dribbble</a
+                              >
 
+                              <a class="social" href="index.html"
+                                        ><span class="fa fa-instagram"></span
+                                        ><br />instagram</a
+                              >
+                    </footer>
 
-            
-                  <button id="add-card"><a class="add-card" onchange="change()" href="panier.html">Ajouter au panier</a></button>
-
-
-
-          
-
-</main>
-           <footer class="socials">
-                               <a class="social" href="index.html"><span class="fa fa-twitter"></span><br>twitter</a>
-      
-                                <a class="social" href="index.html"><span class="fa fa-facebook"></span><br>facebook</a>
-  
-                                <a class="social" href="index.html"><span class="fa fa-dribbble"></span><br>dribbble</a>
-  
-                                <a class="social" href="index.html"><span class="fa fa-instagram"></span><br>instagram</a>  
-            </footer>
-       
-
-             <script src="produit.js" defer> </script>
-
-
-
-        </body>
+                    <script src="produit.js" defer></script>
+          </body>
 </html>

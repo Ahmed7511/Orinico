@@ -48,7 +48,7 @@ const getProduct = async function () {        // création de la fonction asynch
                                                   quantity: quantity,
                                                   imageURL: data.imageUrl,
                                         };
-
+                                        
                                         let cartItems =
                                                   JSON.parse(
                                                             localStorage.getItem(
@@ -126,8 +126,8 @@ const getProduct = async function () {        // création de la fonction asynch
           .catch(error => console.error('error'))
 };
 window.onload = () => {
-          //on charge la fonction au lancement de la page
-          getProduct();
+      //on charge la fonction au lancement de la page
+      getProduct();
 };
 
 function onloadCartNumbers() {
